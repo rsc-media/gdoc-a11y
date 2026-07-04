@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "sidebar-static",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["-y", "http-server", "dist", "-p", "8123", "-c-1"],
+      "port": 8123
+    }
+  ]
+}

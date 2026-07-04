@@ -43,13 +43,28 @@ const client = await build({
   format: 'iife',
   target: 'es2020',
   write: false,
-  charset: 'utf8',
+  // ascii (escape all non-ASCII as \uXXXX) so HtmlService serving can never
+  // mangle multi-byte characters inside the inline <script>.
+  charset: 'ascii',
+  // minify to drop comments: HtmlService's serving pipeline strips "//" to
+  // end-of-line from inline scripts (even inside strings), so the emitted
+  // bundle must contain no "//" sequences at all — see the guard below.
+  minify: true,
 });
 const css = await readFile('src/sidebar/sidebar.css', 'utf8');
 const template = await readFile('src/sidebar/sidebar.html', 'utf8');
-const html = template
-  .replace('/*__STYLES__*/', () => css)
-  .replace('/*__SCRIPT__*/', () => client.outputFiles[0].text);
+const rawJs = client.outputFiles[0].text;
+if (/[^\x00-\x7f]/.test(rawJs)) {
+  throw new Error('sidebar bundle contains non-ASCII characters — HtmlService will corrupt it');
+}
+if (rawJs.includes('//')) {
+  const at = rawJs.indexOf('//');
+  throw new Error(
+    `sidebar bundle contains "//" (offset ${at}: …${rawJs.slice(at - 30, at + 30)}…) — ` +
+      'HtmlService strips "//" to end-of-line even inside strings; build the slashes at runtime',
+  );
+}
+const html = template.replace('/*__STYLES__*/', () => css).replace('/*__SCRIPT__*/', () => rawJs);
 if (html.includes('__STYLES__') || html.includes('__SCRIPT__')) {
   throw new Error('sidebar.html placeholders were not replaced');
 }

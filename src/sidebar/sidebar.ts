@@ -7,7 +7,12 @@ import type { Issue, ScanResult, Severity } from '../core/model';
 import { STRINGS } from '../core/strings';
 
 const S = STRINGS.sidebar;
-const REPO_URL = 'https://github.com/rsc-media/gdoc-a11y';
+// HtmlService's serving pipeline strips "//"-to-end-of-line from inline
+// scripts, even inside string literals — a literal URL here kills the whole
+// bundle with an unterminated string. Build the "//" at runtime via atob
+// (base64 "Ly8="), which no minifier constant-folds back into a literal.
+const SLASHES = atob('Ly8=');
+const REPO_URL = `https:${SLASHES}github.com/rsc-media/gdoc-a11y`;
 
 /* Minimal ambient typing for the google.script.run bridge. */
 interface ScriptRunner {
@@ -18,6 +23,15 @@ interface ScriptRunner {
   applyIssueFix(ref: Issue['ref'], fix: NonNullable<Issue['fix']>, newValue: string): void;
 }
 declare const google: { script: { run: ScriptRunner } };
+
+/** Surface any uncaught error in the sidebar itself — HtmlService has no visible console. */
+window.onerror = (msg, _src, line, col) => {
+  const box = document.getElementById('app') ?? document.body;
+  const p = document.createElement('p');
+  p.className = 'note';
+  p.textContent = `Sidebar error: ${String(msg)} (line ${line ?? '?'}:${col ?? '?'})`;
+  box.append(p);
+};
 
 const app = document.getElementById('app') as HTMLElement;
 let lastResult: ScanResult | null = null;
@@ -259,4 +273,8 @@ function startScan(): void {
     .scanDocument();
 }
 
-renderIdle();
+try {
+  renderIdle();
+} catch (e) {
+  app.textContent = `Sidebar failed to start: ${String(e)}`;
+}
