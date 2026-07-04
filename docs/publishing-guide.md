@@ -41,11 +41,11 @@ Console → **APIs & Services ▸ OAuth consent screen**:
 | --------------------- | ------------------------------------------------------------ |
 | User type             | External                                                     |
 | App name              | `Docs Accessibility Checker`                                 |
-| User support email    | rio.media@riosalado.edu                                       |
+| User support email    | rio.media@riosalado.edu                                      |
 | App logo              | `assets/icon-128.png` (own artwork, no Google trademarks)    |
-| App domain / homepage | https://rsc-media.github.io/gdoc-a11y (see Step 5)                            |
-| Privacy policy link   | `https://rsc-media.github.io/gdoc-a11y/privacy-policy.html`                                 |
-| Terms of service link | `https://rsc-media.github.io/gdoc-a11y/terms.html`                                          |
+| App domain / homepage | https://rsc-media.github.io/gdoc-a11y (see Step 5)           |
+| Privacy policy link   | `https://rsc-media.github.io/gdoc-a11y/privacy-policy.html`  |
+| Terms of service link | `https://rsc-media.github.io/gdoc-a11y/terms.html`           |
 | Authorized domains    | `github.io` (or your custom domain)                          |
 | Scopes                | `…/auth/documents.currentonly`, `…/auth/script.container.ui` |
 
