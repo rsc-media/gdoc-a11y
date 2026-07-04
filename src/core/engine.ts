@@ -6,6 +6,7 @@ import { checkContrast } from './checks/contrast';
 import { checkTitle } from './checks/title';
 import { checkTables } from './checks/tables';
 import { checkDrawings } from './checks/drawings';
+import { checkTextSize } from './checks/textSize';
 
 const CHECKS = [
   checkAltText,
@@ -15,6 +16,7 @@ const CHECKS = [
   checkTitle,
   checkTables,
   checkDrawings,
+  checkTextSize,
 ];
 
 const SEVERITY_ORDER: Record<Severity, number> = { error: 0, warning: 1, review: 2 };

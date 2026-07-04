@@ -175,6 +175,15 @@ function card(issue: Issue): HTMLElement {
     );
   }
 
+  if (issue.checkId === 'CHK-08' && issue.data) {
+    c.append(
+      el('p', {
+        className: 'context',
+        text: `This text is ${issue.data.sizePt} pt — aim for at least ${issue.data.minimumPt} pt.`,
+      }),
+    );
+  }
+
   const note = el('p', { className: 'note' });
   note.hidden = true;
 

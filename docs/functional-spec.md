@@ -112,6 +112,16 @@ Severity legend: **E** = Error, **W** = Warning, **R** = Review (manual).
   hand (select the object ▸ three-dot menu ▸ Alt text).
 - **Why it matters:** same as images — invisible content for screen-reader users.
 
+### CHK-08 Text size — WCAG 1.4.4 advisory (W)
+
+- **Detects** text runs smaller than **10 pt** (ignoring runs shorter than 2 visible
+  characters; one issue per paragraph-and-size combination). WCAG has no hard minimum
+  font size, so this is an advisory best-practice check mapped to 1.4.4 (Resize Text).
+- **Why it matters:** "Tiny text is hard to read for people with low vision — and for
+  anyone on a small screen or printing the document."
+- **Fix guidance:** shows the measured size vs. the 10 pt minimum; suggests 11 pt+ for
+  comfort. No auto-fix in v1 (size choice interacts with layout).
+
 ## 4. Sidebar behavior
 
 ### 4.1 States

@@ -8,15 +8,16 @@ language.
 
 ## What it checks
 
-| Check                                                               | WCAG (2.2 AA) | Can it fix it for you?       |
-| ------------------------------------------------------------------- | ------------- | ---------------------------- |
-| Images missing (or unhelpful) alt text                              | 1.1.1         | ✅ one-click fix             |
-| Heading structure (skipped levels, fake bold headings, no headings) | 1.3.1 / 2.4.6 | guidance                     |
-| Vague link text ("click here") and raw URLs                         | 2.4.4         | ✅ one-click fix             |
-| Low text color contrast                                             | 1.4.3         | guidance with measured ratio |
-| Untitled document                                                   | 2.4.2         | guidance                     |
-| Tables (header rows, layout tables)                                 | 1.3.1         | guided manual review         |
-| Drawings / charts alt text                                          | 1.1.1         | guided manual review         |
+| Check                                                               | WCAG (2.2 AA)    | Can it fix it for you?       |
+| ------------------------------------------------------------------- | ---------------- | ---------------------------- |
+| Images missing (or unhelpful) alt text                              | 1.1.1            | ✅ one-click fix             |
+| Heading structure (skipped levels, fake bold headings, no headings) | 1.3.1 / 2.4.6    | guidance                     |
+| Vague link text ("click here") and raw URLs                         | 2.4.4            | ✅ one-click fix             |
+| Low text color contrast                                             | 1.4.3            | guidance with measured ratio |
+| Untitled document                                                   | 2.4.2            | guidance                     |
+| Tables (header rows, layout tables)                                 | 1.3.1            | guided manual review         |
+| Drawings / charts alt text                                          | 1.1.1            | guided manual review         |
+| Text smaller than 10 pt                                             | 1.4.4 (advisory) | guidance with measured size  |
 
 Every finding says **why it matters** to a real reader and **how to fix it** with the
 exact Docs menu path — WCAG numbers are shown only as fine print for compliance paperwork.

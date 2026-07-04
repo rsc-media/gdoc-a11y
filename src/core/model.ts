@@ -83,7 +83,8 @@ export type CheckId =
   | 'CHK-04' // text contrast
   | 'CHK-05' // document title
   | 'CHK-06' // tables
-  | 'CHK-07'; // drawings / charts / equations
+  | 'CHK-07' // drawings / charts / equations
+  | 'CHK-08'; // text size
 
 export interface IssueFix {
   type: 'setAltText' | 'setLinkText';

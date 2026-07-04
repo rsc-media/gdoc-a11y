@@ -70,6 +70,11 @@ export const STRINGS = {
     why: "The file name is the first thing assistive tech announces, and it's what everyone sees in Drive, tabs, and search results.",
     how: 'Click the title box at the top-left of Docs and give the document a meaningful name.',
   },
+  textTooSmall: {
+    title: 'Text is very small',
+    why: 'Tiny text is hard to read for people with low vision — and for anyone on a small screen or printing the document.',
+    how: 'Select the text and choose a larger size in the toolbar. Aim for at least 10 pt for anything people need to read; 11 pt or larger is most comfortable.',
+  },
   tableReview: {
     title: 'Check this table',
     why: 'Screen readers announce tables cell by cell, so structure matters more than looks.',
