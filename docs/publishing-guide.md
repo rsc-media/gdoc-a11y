@@ -37,17 +37,17 @@ Apps Script creates a hidden GCP project by default; Marketplace publishing requ
 
 Console → **APIs & Services ▸ OAuth consent screen**:
 
-| Field                 | Value                                                        |
-| --------------------- | ------------------------------------------------------------ |
-| User type             | External                                                     |
-| App name              | `Docs Accessibility Checker`                                 |
-| User support email    | rio.media@riosalado.edu                                      |
-| App logo              | `assets/icon-128.png` (own artwork, no Google trademarks)    |
-| App domain / homepage | https://rsc-media.github.io/gdoc-a11y (see Step 5)           |
-| Privacy policy link   | `https://rsc-media.github.io/gdoc-a11y/privacy-policy.html`  |
-| Terms of service link | `https://rsc-media.github.io/gdoc-a11y/terms.html`           |
-| Authorized domains    | `github.io` (or your custom domain)                          |
-| Scopes                | `…/auth/documents.currentonly`, `…/auth/script.container.ui` |
+| Field                 | Value                                                            |
+| --------------------- | ---------------------------------------------------------------- |
+| User type             | External                                                         |
+| App name              | `Docs Accessibility Checker`                                     |
+| User support email    | rio.media@riosalado.edu                                          |
+| App logo              | upload `assets/icon-128.png` (own artwork, no Google trademarks) |
+| App domain / homepage | https://rsc-media.github.io/gdoc-a11y (see Step 5)               |
+| Privacy policy link   | `https://rsc-media.github.io/gdoc-a11y/privacy-policy.html`      |
+| Terms of service link | `https://rsc-media.github.io/gdoc-a11y/terms.html`               |
+| Authorized domains    | `github.io` (or your custom domain)                              |
+| Scopes                | `…/auth/documents.currentonly`, `…/auth/script.container.ui`     |
 
 Both scopes are **non-sensitive**, so no security assessment or demo video is required;
 Google still performs lightweight **brand verification** (name/logo/domain match), which
@@ -100,8 +100,12 @@ Then **Store Listing** — paste-ready copy:
   > calls, and collects no data. Free and open source (MIT).
 
 - **Category:** Productivity (or Education)
-- **Graphics needed:** 128×128 and 32×32 app icons; at least one 1280×800 screenshot of
-  the sidebar showing results in a real-looking doc; 220×140 card banner.
+- **Graphics (ready-made, served from GitHub Pages):**
+  - 128×128 icon: `https://rsc-media.github.io/gdoc-a11y/assets/icon-128.png`
+  - 32×32 icon: `https://rsc-media.github.io/gdoc-a11y/assets/icon-32.png`
+  - 220×140 card banner: `https://rsc-media.github.io/gdoc-a11y/assets/banner-220x140.png`
+  - Still needed: at least one **1280×800 screenshot** of the sidebar showing scan
+    results in a real-looking doc (crop a browser screenshot of the test document).
 - **Support links:** homepage & support = GitHub repo URL; privacy & terms = Pages URLs.
 
 ## Step 7 — Submit for review
