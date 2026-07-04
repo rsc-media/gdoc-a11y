@@ -23,7 +23,7 @@ export function buildModel(doc: GoogleAppsScript.Document.Document): DocModel {
   const pageBackgroundColor = getPageBackground(body);
   const nodes: DocNode[] = [];
 
-  walkContainer(body, [], false, pageBackgroundColor, nodes);
+  walkContainer(body, [], null, nodes);
 
   return {
     title: doc.getName(),
@@ -46,8 +46,7 @@ function getPageBackground(body: Body): string {
 function walkContainer(
   container: Body | ContainerElement,
   path: number[],
-  inTableCell: boolean,
-  pageBg: string,
+  cellBg: string | null,
   out: DocNode[],
 ): void {
   const n = container.getNumChildren();
@@ -60,13 +59,13 @@ function walkContainer(
       const p = (
         type === DocumentApp.ElementType.PARAGRAPH ? child.asParagraph() : child.asListItem()
       ) as Paragraph | ListItem;
-      out.push(paragraphNode(p, childPath, inTableCell));
+      out.push(paragraphNode(p, childPath, cellBg));
       collectParagraphChildren(p, childPath, out);
       collectPositionedImages(p, childPath, out);
     } else if (type === DocumentApp.ElementType.TABLE) {
       const table = child.asTable();
       out.push(tableNode(table, childPath));
-      walkTableCells(table, childPath, pageBg, out);
+      walkTableCells(table, childPath, cellBg, out);
     }
     // Other body children (page breaks, TOC, horizontal rules) are not checked in v1.
   }
@@ -75,14 +74,15 @@ function walkContainer(
 function paragraphNode(
   p: Paragraph | ListItem,
   path: number[],
-  inTableCell: boolean,
+  cellBg: string | null,
 ): ParagraphNode {
   return {
     kind: 'paragraph',
     ref: { path },
     headingLevel: headingLevel(p.getHeading()),
-    runs: extractRuns(p),
-    inTableCell,
+    runs: extractRuns(p, cellBg),
+    // Only table-cell walks pass a non-null-context path deeper than the body.
+    inTableCell: path.length > 1,
   };
 }
 
@@ -111,8 +111,11 @@ function headingLevel(
  * Extract styled runs across all Text children of a paragraph.
  * Run indices must be reproducible: docsActions.ts re-runs this function to
  * resolve a runIndex back to (text element, start, end) for locate/fix.
+ * `cellBg` is the containing table cell's background color (null outside
+ * tables / unshaded cells); it stands in for the page background so the
+ * contrast check sees what the reader sees.
  */
-export function extractRuns(p: Paragraph | ListItem): TextRun[] {
+export function extractRuns(p: Paragraph | ListItem, cellBg: string | null = null): TextRun[] {
   const runs: TextRun[] = [];
   const n = p.getNumChildren();
   for (let i = 0; i < n; i++) {
@@ -130,7 +133,7 @@ export function extractRuns(p: Paragraph | ListItem): TextRun[] {
         bold: text.isBold(start) === true,
         fontSizePt: (text.getFontSize(start) as number | null) ?? DEFAULT_FONT_SIZE_PT,
         foregroundColor: (text.getForegroundColor(start) as string | null) ?? DEFAULT_TEXT_COLOR,
-        backgroundColor: (text.getBackgroundColor(start) as string | null) ?? null,
+        backgroundColor: (text.getBackgroundColor(start) as string | null) ?? cellBg,
         linkUrl: text.getLinkUrl(start),
       });
     }
@@ -223,13 +226,20 @@ function tableNode(table: Table, path: number[]): DocNode {
   return { kind: 'table', ref: { path }, rows, cols, nonEmptyCells, totalCells };
 }
 
-function walkTableCells(table: Table, path: number[], pageBg: string, out: DocNode[]): void {
+function walkTableCells(
+  table: Table,
+  path: number[],
+  parentCellBg: string | null,
+  out: DocNode[],
+): void {
   const rows = table.getNumRows();
   for (let r = 0; r < rows; r++) {
     const row = table.getRow(r);
     const cells = row.getNumCells();
     for (let c = 0; c < cells; c++) {
-      walkContainer(row.getCell(c), path.concat(r, c), true, pageBg, out);
+      const cell = row.getCell(c);
+      const cellBg = (cell.getBackgroundColor() as string | null) ?? parentCellBg;
+      walkContainer(cell, path.concat(r, c), cellBg, out);
     }
   }
 }
