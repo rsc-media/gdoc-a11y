@@ -22,7 +22,12 @@ interface ScriptRunner {
   locateIssue(ref: Issue['ref']): void;
   applyIssueFix(ref: Issue['ref'], fix: NonNullable<Issue['fix']>, newValue: string): void;
 }
-declare const google: { script: { run: ScriptRunner } };
+declare const google: {
+  script: {
+    run: ScriptRunner;
+    host: { editor: { focus(): void } };
+  };
+};
 
 /** Surface any uncaught error in the sidebar itself — HtmlService has no visible console. */
 window.onerror = (msg, _src, line, col) => {
@@ -196,7 +201,13 @@ function card(issue: Issue): HTMLElement {
         .withSuccessHandler((raw) => {
           locateBtn.disabled = false;
           const res = raw as { ok: boolean };
-          if (!res.ok) showNote(note, S.stale);
+          if (!res.ok) {
+            showNote(note, S.stale);
+            return;
+          }
+          // Docs only scrolls to the new selection once the document has
+          // focus again — without this the cursor moves invisibly.
+          google.script.host.editor.focus();
         })
         .withFailureHandler(() => {
           locateBtn.disabled = false;
