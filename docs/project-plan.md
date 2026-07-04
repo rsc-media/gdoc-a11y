@@ -4,7 +4,7 @@ A free, open-source Google Workspace Editor add-on that helps **inexperienced us
 simple WCAG accessibility evaluations on their Google Docs — with plain-language
 explanations and one-click fixes wherever possible.
 
-- **Repository:** `gdoc-a11y` on GitHub (public; URL finalized at first push)
+- **Repository:** https://github.com/rsc-media/gdoc-a11y (public)
 - **Distribution:** Google Workspace Marketplace (free listing)
 - **License:** MIT
 - **Status:** In development (started July 2026)

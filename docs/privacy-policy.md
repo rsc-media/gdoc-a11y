@@ -59,4 +59,4 @@ noted in the project changelog.
 ## Contact
 
 Questions about this policy: open an issue in the project's GitHub repository, or email
-murray@inmanfamily.org.
+rio.media@riosalado.edu.

@@ -7,7 +7,7 @@ import type { Issue, ScanResult, Severity } from '../core/model';
 import { STRINGS } from '../core/strings';
 
 const S = STRINGS.sidebar;
-const REPO_URL = 'https://github.com/REPO_PLACEHOLDER/gdoc-a11y';
+const REPO_URL = 'https://github.com/rsc-media/gdoc-a11y';
 
 /* Minimal ambient typing for the google.script.run bridge. */
 interface ScriptRunner {

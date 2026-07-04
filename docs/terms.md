@@ -35,4 +35,4 @@ terms.
    always published at this page. Continued use after changes constitutes acceptance.
 
 8. **Contact.** Open an issue in the project's GitHub repository, or email
-   murray@inmanfamily.org.
+   rio.media@riosalado.edu.

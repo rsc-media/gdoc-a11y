@@ -8,7 +8,7 @@ import { buildModel } from './docsAdapter';
 import { applyFix, locate, type ActionResult } from './docsActions';
 import { STRINGS } from '../core/strings';
 
-const HELP_URL = 'https://github.com/REPO_PLACEHOLDER/gdoc-a11y#readme';
+const HELP_URL = 'https://github.com/rsc-media/gdoc-a11y#readme';
 
 export function onInstall(e: GoogleAppsScript.Events.DocsOnOpen): void {
   onOpen(e);

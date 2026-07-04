@@ -41,11 +41,11 @@ Console → **APIs & Services ▸ OAuth consent screen**:
 | --------------------- | ------------------------------------------------------------ |
 | User type             | External                                                     |
 | App name              | `Docs Accessibility Checker`                                 |
-| User support email    | murray@inmanfamily.org                                       |
+| User support email    | rio.media@riosalado.edu                                       |
 | App logo              | `assets/icon-128.png` (own artwork, no Google trademarks)    |
-| App domain / homepage | the GitHub Pages URL (see Step 5)                            |
-| Privacy policy link   | `<pages-url>/privacy-policy`                                 |
-| Terms of service link | `<pages-url>/terms`                                          |
+| App domain / homepage | https://rsc-media.github.io/gdoc-a11y (see Step 5)                            |
+| Privacy policy link   | `https://rsc-media.github.io/gdoc-a11y/privacy-policy.html`                                 |
+| Terms of service link | `https://rsc-media.github.io/gdoc-a11y/terms.html`                                          |
 | Authorized domains    | `github.io` (or your custom domain)                          |
 | Scopes                | `…/auth/documents.currentonly`, `…/auth/script.container.ui` |
 
@@ -73,7 +73,7 @@ Console → enable **Google Workspace Marketplace SDK** → **App Configuration*
 - App integration: **Editor add-on ▸ Docs**; paste the Apps Script **deployment ID**
   (not the script ID)
 - OAuth scopes: exactly the two scopes above
-- Developer name: Murray Inman; developer email: murray@inmanfamily.org
+- Developer name: Murray Inman; developer email: rio.media@riosalado.edu
 
 Then **Store Listing** — paste-ready copy:
 
