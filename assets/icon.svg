@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <!-- Docs Accessibility Checker icon: a document page with an accessibility
+       figure and a check mark. Original artwork, MIT licensed.
+       Export PNGs: 128x128 (store icon), 32x32 (toolbar). -->
+  <defs>
+    <clipPath id="page"><rect x="24" y="12" width="80" height="104" rx="8"/></clipPath>
+  </defs>
+  <rect x="24" y="12" width="80" height="104" rx="8" fill="#1a5cb0"/>
+  <rect x="24" y="12" width="80" height="104" rx="8" fill="none" stroke="#174c92" stroke-width="4"/>
+  <g clip-path="url(#page)">
+    <rect x="36" y="26" width="40" height="6" rx="3" fill="#bcd3f5"/>
+    <rect x="36" y="38" width="56" height="6" rx="3" fill="#8fb4ec"/>
+  </g>
+  <!-- accessibility figure -->
+  <g fill="#ffffff">
+    <circle cx="58" cy="60" r="7"/>
+    <path d="M42 74 c0-2.2 1.8-4 4-4 h24 c2.2 0 4 1.8 4 4 s-1.8 4-4 4 h-8 v10 l7 16 c0.9 2-0.1 4.4-2.1 5.3 -2 0.9-4.4-0.1-5.3-2.1 l-5.6-12.8 -5.6 12.8 c-0.9 2-3.3 3-5.3 2.1 -2-0.9-3-3.3-2.1-5.3 l7-16 v-10 h-8 c-2.2 0-4-1.8-4-4z"/>
+  </g>
+  <!-- check badge -->
+  <circle cx="98" cy="94" r="22" fill="#146c2e" stroke="#ffffff" stroke-width="4"/>
+  <path d="M87 94 l8 8 l16 -16" fill="none" stroke="#ffffff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

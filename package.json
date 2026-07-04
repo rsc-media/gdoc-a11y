@@ -1,0 +1,26 @@
+{
+  "name": "gdoc-a11y",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Docs Accessibility Checker — a free, open-source Google Workspace add-on that helps anyone run simple WCAG accessibility checks on Google Docs.",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint": "eslint . && prettier --check .",
+    "format": "prettier --write .",
+    "push": "npm run build && clasp push"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.0.0",
+    "@types/google-apps-script": "^1.0.83",
+    "esbuild": "^0.25.0",
+    "eslint": "^9.0.0",
+    "prettier": "^3.3.0",
+    "typescript": "^5.5.0",
+    "typescript-eslint": "^8.0.0",
+    "vitest": "^3.0.0"
+  }
+}

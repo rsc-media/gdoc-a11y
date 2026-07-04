@@ -1,0 +1,253 @@
+/* The sidebar itself must meet WCAG AA: 4.5:1 contrast, visible focus,
+   keyboard operable. Colors below are checked against white. */
+:root {
+  --blue: #1a5cb0; /* 5.5:1 on white */
+  --blue-dark: #174c92;
+  --error: #b3261e; /* 5.9:1 */
+  --warning: #7a5900; /* 5.6:1 */
+  --review: #3c5aa0; /* 5.9:1 */
+  --ok: #146c2e; /* 5.8:1 */
+  --text: #202124;
+  --muted: #575b5f; /* 6.4:1 */
+  --border: #dadce0;
+  --bg-soft: #f6f8fa;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Google Sans', Roboto, Arial, sans-serif;
+  font-size: 13px;
+  color: var(--text);
+  background: #fff;
+}
+
+#app {
+  padding: 12px;
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+button:focus-visible,
+input:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 2px;
+}
+
+.primary {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  border: none;
+  background: var(--blue);
+  color: #fff;
+  font-weight: 600;
+}
+
+.primary:hover:not(:disabled) {
+  background: var(--blue-dark);
+}
+
+.primary:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.intro {
+  color: var(--muted);
+  margin: 0 0 12px;
+}
+
+.status {
+  margin: 12px 0;
+  color: var(--muted);
+}
+
+.summary {
+  margin: 12px 0;
+  padding: 10px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg-soft);
+}
+
+.summary p {
+  margin: 0;
+  font-weight: 600;
+}
+
+.summary .sub {
+  font-weight: 400;
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+.all-clear {
+  color: var(--ok);
+}
+
+.group {
+  margin-top: 14px;
+}
+
+.group > h2 {
+  font-size: 13px;
+  margin: 0 0 6px;
+}
+
+.group.error > h2 {
+  color: var(--error);
+}
+.group.warning > h2 {
+  color: var(--warning);
+}
+.group.review > h2 {
+  color: var(--review);
+}
+.group.fixed > h2 {
+  color: var(--ok);
+}
+
+.card {
+  border: 1px solid var(--border);
+  border-left-width: 4px;
+  border-radius: 6px;
+  padding: 8px 10px;
+  margin-bottom: 8px;
+}
+
+.card.error {
+  border-left-color: var(--error);
+}
+.card.warning {
+  border-left-color: var(--warning);
+}
+.card.review {
+  border-left-color: var(--review);
+}
+
+.card.resolved {
+  border-left-color: var(--ok);
+  background: var(--bg-soft);
+}
+
+.card.resolved .title {
+  text-decoration: line-through;
+  color: var(--muted);
+}
+
+.card .title {
+  font-weight: 600;
+  margin: 0;
+}
+
+.card .context {
+  color: var(--muted);
+  margin: 4px 0 0;
+  word-break: break-word;
+}
+
+.card .wcag {
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+.card .actions {
+  display: flex;
+  gap: 6px;
+  margin-top: 8px;
+  flex-wrap: wrap;
+}
+
+.card .actions button {
+  padding: 4px 10px;
+  border: 1px solid var(--border);
+  background: #fff;
+  color: var(--blue);
+  font-weight: 600;
+}
+
+.card .actions button:hover:not(:disabled) {
+  background: var(--bg-soft);
+}
+
+.fixrow {
+  display: flex;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.fixrow input {
+  flex: 1;
+  min-width: 0;
+  padding: 5px 8px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font: inherit;
+}
+
+details {
+  margin-top: 8px;
+}
+
+summary {
+  cursor: pointer;
+  color: var(--blue);
+  font-weight: 600;
+}
+
+details h3 {
+  font-size: 12px;
+  margin: 8px 0 2px;
+}
+
+details p {
+  margin: 0;
+  color: var(--text);
+}
+
+.note {
+  color: var(--error);
+  margin: 6px 0 0;
+}
+
+.error-box {
+  border: 1px solid var(--error);
+  border-radius: 8px;
+  padding: 12px;
+  margin-top: 12px;
+}
+
+.error-box p {
+  margin: 0 0 10px;
+}
+
+footer {
+  margin-top: 16px;
+  padding-top: 8px;
+  border-top: 1px solid var(--border);
+  font-size: 11px;
+  color: var(--muted);
+}
+
+footer a {
+  color: var(--blue);
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
