@@ -89,9 +89,17 @@ script with — for anyone beyond a handful of accounts, move to Path B.
 ## Path B — Private / internal rollout (riosalado.edu only)
 
 Best for a college-wide pilot: any Rio Salado account can install it like a normal
-add-on, with a clean install experience and no Google review. **Requires a Google
-Workspace admin** — the rio.media account is probably not a super-admin, so confirm who
-owns Admin console access before starting.
+add-on, with a clean install experience and no Google review.
+
+**rio.media@riosalado.edu is confirmed NOT a Workspace admin (2026-07-05)**, so Path B is
+a two-person job — rio.media builds the listing, and Rio Salado IT (a super-admin) does
+the allowlist/install. Line it up before starting:
+
+| rio.media can do alone                                        | Needs Rio Salado IT (super-admin)                                                                                                                                         |
+| ------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Create the private Marketplace listing (B2–B4) and publish it | Allowlist the app so the domain can install it (B5) — most .edu tenants block non-allowlisted Marketplace apps by default, so **without this step nobody can install it** |
+| —                                                             | Possibly create the GCP project (B1) if project creation is locked down                                                                                                   |
+| —                                                             | Optionally admin-install to a pilot org-unit so only the pilot group gets it                                                                                              |
 
 > Use a **separate Google Cloud project** from the future public listing (Path C),
 > because visibility is locked once published.
@@ -129,11 +137,18 @@ Console ▸ enable **Google Workspace Marketplace SDK** ▸ **App Configuration*
 Fill the **Store Listing** with the same copy/graphics as Path C Step 5, then **Publish**
 (published immediately — no Google review for private apps).
 
-### B5. Admin allowlist / install (Workspace super-admin)
+### B5. Admin allowlist / install — hand to Rio Salado IT
 
-Admin console ▸ **Apps ▸ Google Workspace Marketplace apps ▸ Allowlist** → add the app,
-or do an **admin install** scoped to a pilot **organizational unit** so only the pilot
-group gets it. Watch adoption and errors from the Admin console.
+rio.media can't do this step. Send IT the published app's name/ID and ask them to, in the
+**Admin console ▸ Apps ▸ Google Workspace Marketplace apps**:
+
+1. **Allowlist** the app (required — otherwise domain users are blocked from installing it).
+2. Optionally **admin-install** it, scoped to a pilot **organizational unit**, so only the
+   pilot group receives it.
+
+They can then watch adoption and errors from the Admin console. Give them the
+[privacy policy](privacy-policy.md), [terms](terms.md), and the two non-sensitive scopes
+for their review — that's usually all a security/privacy team needs to approve it.
 
 ---
 
