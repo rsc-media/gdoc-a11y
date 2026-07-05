@@ -1,41 +1,156 @@
 # Publishing Guide — Google Workspace Marketplace
 
-Step-by-step instructions for taking this add-on from the repo to a public Marketplace
-listing. Console steps must be done by the account owner in a browser; everything that
-can be prepared in advance is in this file, ready to paste.
+How to take this add-on from the repo into users' hands. Console steps must be done by
+the account owner (rio.media@riosalado.edu) in a browser; everything that can be prepared
+in advance is in this file, ready to paste.
 
-## Prerequisites (one-time)
+## Rollout paths
+
+Pick the smallest path that fits where you are. They build on each other.
+
+| Path                       | Who can use it                                  | Google review?                  | Admin needed?         | Use when                                       |
+| -------------------------- | ----------------------------------------------- | ------------------------------- | --------------------- | ---------------------------------------------- |
+| **A — Test-user pilot**    | A few named reviewers you share the script with | None                            | No                    | Technical/legal review, first hands-on testing |
+| **B — Private / internal** | Anyone at riosalado.edu                         | None (private apps skip review) | Yes (Workspace admin) | College-wide pilot, clean install experience   |
+| **C — Public launch**      | Anyone, worldwide                               | Yes (Google reviews)            | No                    | Final public release on the Marketplace        |
+
+**Do Path A first, then Path B, then C.** Two things carry across all three:
+
+- Our OAuth scopes — `documents.currentonly` and `script.container.ui` — are both
+  **non-sensitive**. That means: no security assessment, no demo video, no "unverified
+  app" warning screen (that wall only appears for _sensitive/restricted_ scopes), and no
+  cap on how many people can use the app while unpublished.
+- **Marketplace app visibility is locked once you publish it** (Path B or C). You cannot
+  flip a Private app to Public later. So Path B and Path C should each get their **own
+  Google Cloud project**, and Path A needs no project at all. This keeps the eventual
+  public listing clean.
+
+## Prerequisites (one-time — already done for this project)
 
 1. **Apps Script API enabled** — https://script.google.com/home/usersettings → toggle ON.
-2. **clasp logged in** — `clasp login` (opens a browser).
-3. **Script project created** — from the repo root:
+2. **clasp logged in** — `clasp login`.
+3. **Script project created and pushed** — from the repo root:
    ```sh
    clasp create --type standalone --title "Docs Accessibility Checker" --rootDir dist
    npm run push
    ```
+   The current project ID is in `.clasp.json`; open it with `clasp open-script`.
 
-## Step 1 — Test as an unpublished add-on
+---
 
-1. `clasp open-script` to open the Apps Script editor.
-2. **Run ▸ Test as add-on** (or Deploy ▸ Test deployments in the new editor) → select a
-   test Google Doc → Install.
-3. In the doc: **Extensions ▸ Docs Accessibility Checker ▸ Check document**. First run
-   triggers the consent screen (unverified-app warning is normal during development).
-4. Run the acceptance test from the functional spec §8 (seeded document).
+## Path A — Test-user pilot (share the script, no Marketplace, no admin)
 
-## Step 2 — Google Cloud project
+Best for a handful of reviewers (technical, legal, a few teachers). No listing, no
+publishing, no admin involvement. Each reviewer installs a **test deployment** of the
+add-on for their own account and runs it on their own documents.
 
-Apps Script creates a hidden GCP project by default; Marketplace publishing requires a
-**standard** one.
+Because our scopes are non-sensitive, reviewers on riosalado.edu (or anywhere) get the
+clean two-permission consent screen — no unverified-app warning.
 
-1. https://console.cloud.google.com → New Project → name: `docs-accessibility-checker`.
-2. Note the **Project Number** (Dashboard page).
-3. In the Apps Script editor: **Project Settings ▸ Google Cloud Platform (GCP) Project ▸
-   Change project** → paste the project number.
+### A1. (Owner) Confirm your own test deployment works
 
-## Step 3 — OAuth consent screen (brand verification)
+1. `clasp open-script` → **Deploy ▸ Test deployments ▸ Install** → pick a Doc → **Execute**.
+2. In the doc: **Extensions ▸ Docs Accessibility Checker ▸ Check document**. Run the
+   acceptance test from the functional spec §8.
 
-Console → **APIs & Services ▸ OAuth consent screen**:
+### A2. (Owner) Share the script project with reviewers
+
+Test deployments require **edit** access to the script project (the code is open source
+on GitHub anyway, so this exposes nothing new).
+
+1. Open the project at script.google.com (`clasp open-script`).
+2. Top-right **Share** (or open the project's file in Drive → Share).
+3. Add each reviewer's Google account as **Editor**. Send them the "How reviewers install
+   it" steps below.
+
+> Optional — only if you later add a _sensitive_ scope: add reviewers under
+> Cloud console ▸ **APIs & Services ▸ OAuth consent screen ▸ Audience ▸ Test users**
+> (up to 100). Not needed for the current non-sensitive scopes.
+
+### A3. (Each reviewer) Install and use it
+
+1. Open the script link the owner shared.
+2. **Deploy ▸ Test deployments ▸ Install** → **Config: Installed for current user** →
+   pick one of your own Google Docs → **Done** → select the test → **Execute**.
+3. The doc opens with the add-on attached: **Extensions ▸ Docs Accessibility Checker ▸
+   Check document**. It stays available in your Extensions menu for testing.
+
+### A4. Collect feedback
+
+Point reviewers at the repo's **GitHub Issues** for bugs/ideas (linked from the sidebar
+footer). Legal/technical reviewers can review the exact scoped app plus the
+[privacy policy](privacy-policy.md) and [terms](terms.md).
+
+**Limitation:** editor add-ons can't be "sideloaded" to people you haven't shared the
+script with — for anyone beyond a handful of accounts, move to Path B.
+
+---
+
+## Path B — Private / internal rollout (riosalado.edu only)
+
+Best for a college-wide pilot: any Rio Salado account can install it like a normal
+add-on, with a clean install experience and no Google review. **Requires a Google
+Workspace admin** — the rio.media account is probably not a super-admin, so confirm who
+owns Admin console access before starting.
+
+> Use a **separate Google Cloud project** from the future public listing (Path C),
+> because visibility is locked once published.
+
+### B1. Google Cloud project
+
+1. https://console.cloud.google.com → **New Project** → name e.g.
+   `docs-a11y-internal`. Note the **Project Number**.
+2. Apps Script editor ▸ **Project Settings ▸ Google Cloud Platform (GCP) Project ▸ Change
+   project** → paste the number.
+   > If project creation is blocked, Rio Salado IT restricts it — have an admin create the
+   > project and grant rio.media the **Owner** role on it.
+
+### B2. OAuth consent screen
+
+Console ▸ **APIs & Services ▸ OAuth consent screen**. Same fields as the table in Path C
+Step 2, with **User type: Internal** (available because rio.media is a Workspace account).
+Internal apps skip verification entirely for domain users.
+
+### B3. Versioned deployment
+
+Apps Script editor ▸ **Deploy ▸ New deployment ▸ type: Add-on** → description `v0.9.0
+(internal pilot)` → note the **deployment ID** (or `clasp deploy`).
+
+### B4. Marketplace SDK — private
+
+Console ▸ enable **Google Workspace Marketplace SDK** ▸ **App Configuration**:
+
+- **App visibility: Private** (My Domain / riosalado.edu only)
+- Installation settings: **Individual + admin install**
+- App integration: **Editor add-on ▸ Docs**; paste the **deployment ID** (not script ID)
+- OAuth scopes: the two non-sensitive scopes
+- Developer name: Rio Salado College Media; developer email: rio.media@riosalado.edu
+
+Fill the **Store Listing** with the same copy/graphics as Path C Step 5, then **Publish**
+(published immediately — no Google review for private apps).
+
+### B5. Admin allowlist / install (Workspace super-admin)
+
+Admin console ▸ **Apps ▸ Google Workspace Marketplace apps ▸ Allowlist** → add the app,
+or do an **admin install** scoped to a pilot **organizational unit** so only the pilot
+group gets it. Watch adoption and errors from the Admin console.
+
+---
+
+## Path C — Public launch
+
+The full public Marketplace listing. Use a **fresh Google Cloud project** (not the
+internal one from Path B). Google reviews the app before it goes live.
+
+### C1. Google Cloud project
+
+1. https://console.cloud.google.com → **New Project** → name `docs-accessibility-checker`.
+   Note the **Project Number**.
+2. Apps Script editor ▸ **Project Settings ▸ GCP Project ▸ Change project** → paste it.
+
+### C2. OAuth consent screen (brand verification)
+
+Console ▸ **APIs & Services ▸ OAuth consent screen**:
 
 | Field                 | Value                                                            |
 | --------------------- | ---------------------------------------------------------------- |
@@ -43,37 +158,37 @@ Console → **APIs & Services ▸ OAuth consent screen**:
 | App name              | `Docs Accessibility Checker`                                     |
 | User support email    | rio.media@riosalado.edu                                          |
 | App logo              | upload `assets/icon-128.png` (own artwork, no Google trademarks) |
-| App domain / homepage | https://rsc-media.github.io/gdoc-a11y (see Step 5)               |
+| App domain / homepage | https://rsc-media.github.io/gdoc-a11y                            |
 | Privacy policy link   | `https://rsc-media.github.io/gdoc-a11y/privacy-policy.html`      |
 | Terms of service link | `https://rsc-media.github.io/gdoc-a11y/terms.html`               |
 | Authorized domains    | `github.io` (or your custom domain)                              |
 | Scopes                | `…/auth/documents.currentonly`, `…/auth/script.container.ui`     |
 
-Both scopes are **non-sensitive**, so no security assessment or demo video is required;
-Google still performs lightweight **brand verification** (name/logo/domain match), which
-can take a few days. Submit for verification and continue — the Marketplace steps can
-proceed in parallel.
+Both scopes are non-sensitive → no security assessment or demo video. Google still does
+lightweight **brand verification** (name/logo/domain match), which can take a few days.
+Submit and continue — the Marketplace steps proceed in parallel. If Google asks you to
+verify ownership of `rsc-media.github.io`, use Search Console's HTML-file method (add the
+file to the repo `docs/` folder).
 
-## Step 4 — Versioned deployment
+### C3. Versioned deployment
 
-In the Apps Script editor: **Deploy ▸ New deployment ▸ type: Add-on** → description
-`v1.0.0` → note the **deployment ID** (or use `clasp deploy`).
+Apps Script editor ▸ **Deploy ▸ New deployment ▸ type: Add-on** → description `v1.0.0` →
+note the **deployment ID** (or `clasp deploy`).
 
-## Step 5 — Host the policies (GitHub Pages)
+### C4. Host the policies (GitHub Pages) — already done
 
-Repo Settings ▸ Pages ▸ Deploy from branch ▸ `main` / `docs/`. The privacy policy and
-terms then resolve as public URLs (needed by both the consent screen and the listing).
+Repo Settings ▸ Pages ▸ Deploy from branch ▸ `main` / `docs/`. Privacy policy, terms, and
+graphics already resolve at `https://rsc-media.github.io/gdoc-a11y/…`.
 
-## Step 6 — Marketplace SDK
+### C5. Marketplace SDK — public
 
-Console → enable **Google Workspace Marketplace SDK** → **App Configuration**:
+Console ▸ enable **Google Workspace Marketplace SDK** ▸ **App Configuration**:
 
 - App visibility: **Public**
 - Installation settings: **Individual + admin install**
-- App integration: **Editor add-on ▸ Docs**; paste the Apps Script **deployment ID**
-  (not the script ID)
-- OAuth scopes: exactly the two scopes above
-- Developer name: Murray Inman; developer email: rio.media@riosalado.edu
+- App integration: **Editor add-on ▸ Docs**; paste the **deployment ID** (not script ID)
+- OAuth scopes: the two non-sensitive scopes
+- Developer name: Rio Salado College Media; developer email: rio.media@riosalado.edu
 
 Then **Store Listing** — paste-ready copy:
 
@@ -104,15 +219,16 @@ Then **Store Listing** — paste-ready copy:
   - 128×128 icon: `https://rsc-media.github.io/gdoc-a11y/assets/icon-128.png`
   - 32×32 icon: `https://rsc-media.github.io/gdoc-a11y/assets/icon-32.png`
   - 220×140 card banner: `https://rsc-media.github.io/gdoc-a11y/assets/banner-220x140.png`
-  - Still needed: at least one **1280×800 screenshot** of the sidebar showing scan
-    results in a real-looking doc (crop a browser screenshot of the test document).
+  - 1280×800 screenshot: `https://rsc-media.github.io/gdoc-a11y/assets/screenshot-1280x800.png`
 - **Support links:** homepage & support = GitHub repo URL; privacy & terms = Pages URLs.
 
-## Step 7 — Submit for review
+### C6. Submit for review
 
 App Configuration + Store Listing complete → **Publish**. Review typically takes a few
-days to two weeks for a non-sensitive-scope editor add-on. Respond to reviewer feedback
-via the same console; each resubmission uses a new versioned deployment if code changed.
+days to two weeks for a non-sensitive-scope editor add-on. Respond to reviewer feedback in
+the same console; each resubmission uses a new versioned deployment if code changed.
+
+---
 
 ## Updating after launch
 
