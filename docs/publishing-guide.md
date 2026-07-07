@@ -201,9 +201,20 @@ Console ▸ **APIs & Services ▸ OAuth consent screen**:
 a short demo video showing the add-on using its scopes. No third-party security
 assessment applies — that's only for _restricted_ scopes. This is the routine path for
 every sidebar editor add-on; allow a few days to a few weeks. Submit and continue — the
-Marketplace steps proceed in parallel. If Google asks you to verify ownership of
-`rsc-media.github.io`, use Search Console's HTML-file method (add the file to the repo
-`docs/` folder).
+Marketplace steps proceed in parallel.
+
+**Homepage & domain verification (required):** the app homepage lives at
+https://rsc-media.github.io/gdoc-a11y/ (`docs/index.md`) — it identifies the app,
+describes functionality, explains each scope's purpose, and links the same privacy
+policy URL as the consent screen. Google requires the homepage domain to be **verified
+as yours**: in [Search Console](https://search.google.com/search-console), signed in as
+rio.media, add the property `rsc-media.github.io/gdoc-a11y/` (URL-prefix type) and
+verify with the **HTML-file method** — commit the `googleXXXX.html` file Google provides
+into the repo's `docs/` folder and it's served automatically. (github.io subdomains are
+verifiable this way; the "no third-party platforms" rule targets hosts like Google Sites
+or social media where you can't prove subdomain ownership. If a reviewer objects anyway,
+the fallback is pointing a college-owned subdomain, e.g. on learnatrio.com, at the Pages
+site via CNAME — requires Rio Salado IT for DNS.)
 
 Suggested scope justification (paste-adapt): "This editor add-on scans the currently
 open Google Doc for accessibility problems. `documents.currentonly` reads the open
