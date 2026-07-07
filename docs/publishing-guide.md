@@ -16,10 +16,18 @@ Pick the smallest path that fits where you are. They build on each other.
 
 **Do Path A first, then Path B, then C.** Two things carry across all three:
 
-- Our OAuth scopes — `documents.currentonly` and `script.container.ui` — are both
-  **non-sensitive**. That means: no security assessment, no demo video, no "unverified
-  app" warning screen (that wall only appears for _sensitive/restricted_ scopes), and no
-  cap on how many people can use the app while unpublished.
+- Scope classification (per the Cloud console): `documents.currentonly` is
+  **non-sensitive**, but `script.container.ui` — required by every editor add-on that
+  shows a sidebar — is classified **sensitive**. Neither is _restricted_, so the heavy
+  third-party security assessment never applies. Practical effects:
+  - **riosalado.edu users are exempt from verification** (Apps Script projects whose
+    owner and users share a Workspace domain skip it), so Path A domain reviewers and
+    all of Path B get a clean consent screen with no caps.
+  - **Users outside riosalado.edu** of the unpublished app see Google's "unverified
+    app" warning and count against a 100-user cap — workable for a few external
+    reviewers (see Path A).
+  - **Path C (public)** therefore includes standard OAuth verification (scope
+    justification, sometimes a short demo video) — routine for editor add-ons.
 - **Marketplace app visibility is locked once you publish it** (Path B or C). You cannot
   flip a Private app to Public later. So Path B and Path C should each get their **own
   Google Cloud project**, and Path A needs no project at all. This keeps the eventual
@@ -44,8 +52,12 @@ Best for a handful of reviewers (technical, legal, a few teachers). No listing, 
 publishing, no admin involvement. Each reviewer installs a **test deployment** of the
 add-on for their own account and runs it on their own documents.
 
-Because our scopes are non-sensitive, reviewers on riosalado.edu (or anywhere) get the
-clean two-permission consent screen — no unverified-app warning.
+Reviewers on **riosalado.edu** get the clean two-permission consent screen: Apps Script
+projects whose owner (rio.media) and users share a Workspace domain are exempt from OAuth
+verification. Reviewers **outside** the domain will see Google's "unverified app"
+interstitial (because `script.container.ui` is a sensitive scope) — they can proceed via
+**Advanced ▸ Go to Docs Accessibility Checker (unsafe)**; Google caps an unverified app
+at 100 such external users, which is fine for a pilot.
 
 ### A1. (Owner) Confirm your own test deployment works
 
@@ -63,9 +75,10 @@ on GitHub anyway, so this exposes nothing new).
 3. Add each reviewer's Google account as **Editor**. Send them the "How reviewers install
    it" steps below.
 
-> Optional — only if you later add a _sensitive_ scope: add reviewers under
-> Cloud console ▸ **APIs & Services ▸ OAuth consent screen ▸ Audience ▸ Test users**
-> (up to 100). Not needed for the current non-sensitive scopes.
+> Domain (riosalado.edu) reviewers need nothing more. If external reviewers find the
+> "unverified app" interstitial off-putting and a standard GCP project is attached
+> (Path B/C), you can instead add them under Cloud console ▸ **APIs & Services ▸ OAuth
+> consent screen ▸ Audience ▸ Test users** (up to 100) with the app in Testing status.
 
 ### A3. (Each reviewer) Install and use it
 
@@ -131,7 +144,7 @@ Console ▸ enable **Google Workspace Marketplace SDK** ▸ **App Configuration*
 - **App visibility: Private** (My Domain / riosalado.edu only)
 - Installation settings: **Individual + admin install**
 - App integration: **Editor add-on ▸ Docs**; paste the **deployment ID** (not script ID)
-- OAuth scopes: the two non-sensitive scopes
+- OAuth scopes: the two scopes from `appsscript.json`
 - Developer name: Rio Salado College Media; developer email: rio.media@riosalado.edu
 
 Fill the **Store Listing** with the same copy/graphics as Path C Step 5, then **Publish**
@@ -147,7 +160,7 @@ rio.media can't do this step. Send IT the published app's name/ID and ask them t
    pilot group receives it.
 
 They can then watch adoption and errors from the Admin console. Give them the
-[privacy policy](privacy-policy.md), [terms](terms.md), and the two non-sensitive scopes
+[privacy policy](privacy-policy.md), [terms](terms.md), and the two narrow scopes
 for their review — that's usually all a security/privacy team needs to approve it.
 
 ---
@@ -179,11 +192,21 @@ Console ▸ **APIs & Services ▸ OAuth consent screen**:
 | Authorized domains    | `github.io` (or your custom domain)                              |
 | Scopes                | `…/auth/documents.currentonly`, `…/auth/script.container.ui`     |
 
-Both scopes are non-sensitive → no security assessment or demo video. Google still does
-lightweight **brand verification** (name/logo/domain match), which can take a few days.
-Submit and continue — the Marketplace steps proceed in parallel. If Google asks you to
-verify ownership of `rsc-media.github.io`, use Search Console's HTML-file method (add the
-file to the repo `docs/` folder).
+`documents.currentonly` is non-sensitive, but `script.container.ui` is classified
+**sensitive**, so expect standard **OAuth verification**: brand verification
+(name/logo/domain match) plus a scope-usage justification, and Google sometimes requests
+a short demo video showing the add-on using its scopes. No third-party security
+assessment applies — that's only for _restricted_ scopes. This is the routine path for
+every sidebar editor add-on; allow a few days to a few weeks. Submit and continue — the
+Marketplace steps proceed in parallel. If Google asks you to verify ownership of
+`rsc-media.github.io`, use Search Console's HTML-file method (add the file to the repo
+`docs/` folder).
+
+Suggested scope justification (paste-adapt): "This editor add-on scans the currently
+open Google Doc for accessibility problems. `documents.currentonly` reads the open
+document's structure and applies user-requested fixes (image alt text, link text) to
+that document only. `script.container.ui` displays the add-on's results sidebar inside
+Google Docs. The add-on makes no external network requests and stores no data."
 
 ### C3. Versioned deployment
 
@@ -202,7 +225,7 @@ Console ▸ enable **Google Workspace Marketplace SDK** ▸ **App Configuration*
 - App visibility: **Public**
 - Installation settings: **Individual + admin install**
 - App integration: **Editor add-on ▸ Docs**; paste the **deployment ID** (not script ID)
-- OAuth scopes: the two non-sensitive scopes
+- OAuth scopes: the two scopes from `appsscript.json`
 - Developer name: Rio Salado College Media; developer email: rio.media@riosalado.edu
 
 Then **Store Listing** — paste-ready copy:
@@ -240,7 +263,7 @@ Then **Store Listing** — paste-ready copy:
 ### C6. Submit for review
 
 App Configuration + Store Listing complete → **Publish**. Review typically takes a few
-days to two weeks for a non-sensitive-scope editor add-on. Respond to reviewer feedback in
+days to a few weeks for an editor add-on with minimal scopes. Respond to reviewer feedback in
 the same console; each resubmission uses a new versioned deployment if code changed.
 
 ---

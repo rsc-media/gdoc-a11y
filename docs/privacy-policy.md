@@ -13,7 +13,7 @@ analytics, no advertising, and no data collection of any kind.
 
 ## What the add-on can access
 
-The add-on requests two narrow, non-sensitive permissions:
+The add-on requests only two narrow permissions:
 
 - **View and manage the document it is installed in**
   (`https://www.googleapis.com/auth/documents.currentonly`) — used to read the open

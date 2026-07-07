@@ -24,7 +24,7 @@ exact Docs menu path — WCAG numbers are shown only as fine print for complianc
 
 ## Privacy
 
-The add-on uses only two narrow, non-sensitive permissions: read/write access to **the
+The add-on uses only two narrow permissions: read/write access to **the
 document it is open in** (`documents.currentonly`) and permission to show its sidebar
 (`script.container.ui`). It makes **no network calls**, has **no server**, and collects
 **no data**. See the [privacy policy](docs/privacy-policy.md).

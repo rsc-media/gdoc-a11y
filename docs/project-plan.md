@@ -63,9 +63,10 @@ Editor add-on built with Apps Script; TypeScript + esbuild locally, pushed with 
 The checks engine is host-agnostic (runs on a normalized document model), so Sheets and
 Slides become new adapters, not rewrites. Details in the [design spec](design-spec.md).
 
-Key constraint honored throughout: **only non-sensitive OAuth scopes**
-(`documents.currentonly`, `script.container.ui`). The add-on can only ever read the
-document it is open in, and sends nothing anywhere — there is no server.
+Key constraint honored throughout: **minimal OAuth scopes** — `documents.currentonly`
+(the narrowest Docs scope, non-sensitive) and `script.container.ui` (required for any
+sidebar; classified sensitive by Google, see the publishing guide). The add-on can only
+ever read the document it is open in, and sends nothing anywhere — there is no server.
 
 ## 5. Phases and milestones
 

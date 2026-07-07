@@ -10,7 +10,9 @@ Google Workspace **Editor add-on** for Google Docs:
   document, move the cursor, and apply fixes.
 - **UI:** `HtmlService` sidebar (300 px, HTML/CSS/JS). Sidebar ⇄ server via
   `google.script.run`.
-- **Scopes** (declared in `appsscript.json`; both non-sensitive):
+- **Scopes** (declared in `appsscript.json`; the narrowest set that lets a sidebar
+  add-on function — note Google classifies `script.container.ui` as _sensitive_, see the
+  publishing guide):
   - `https://www.googleapis.com/auth/documents.currentonly`
   - `https://www.googleapis.com/auth/script.container.ui`
 
