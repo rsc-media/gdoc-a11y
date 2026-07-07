@@ -28,10 +28,13 @@ Pick the smallest path that fits where you are. They build on each other.
     reviewers (see Path A).
   - **Path C (public)** therefore includes standard OAuth verification (scope
     justification, sometimes a short demo video) — routine for editor add-ons.
-- **Marketplace app visibility is locked once you publish it** (Path B or C). You cannot
-  flip a Private app to Public later. So Path B and Path C should each get their **own
-  Google Cloud project**, and Path A needs no project at all. This keeps the eventual
-  public listing clean.
+- **Marketplace app visibility is locked once you save the App Configuration page**
+  (Path B or C). You cannot flip Private to Public later, and the **Unlisted** option is
+  equally permanent — an unlisted app can never become searchable, yet it still goes
+  through public-class Google review. (For Path B choose Private; for Path C choose
+  Public without Unlisted.) So Path B and Path C should each get their **own Google
+  Cloud project**, and Path A needs no project at all. This keeps the eventual public
+  listing clean.
 
 ## Prerequisites (one-time — already done for this project)
 
