@@ -3,7 +3,7 @@ title: Docs Accessibility Checker
 description: A free, open-source Google Docs add-on that finds and fixes common accessibility problems, explained in plain language.
 ---
 
-<img src="assets/icon-128.png" alt="Docs Accessibility Checker logo: a document page with an accessibility figure and a green check mark" width="96" height="96" />
+<img src="assets/banner-v1-220x140.png" alt="Docs Accessibility Checker logo: a document page with an accessibility figure and a green check mark" width="96" height="96" />
 
 # Docs Accessibility Checker
 
@@ -21,7 +21,7 @@ real reader and _how to fix it_, with the exact Docs menu path — and includes 
 **Show me** button that jumps to the problem in your document. For image alt text and
 link text, a **Fix** button applies your correction in one click.
 
-<img src="assets/screenshot-1280x800.png" alt="Google Docs with the Docs Accessibility Checker sidebar open, showing a scan summary of 0 errors and 7 warnings, and warning cards such as 'This looks like a heading, but isn't one' with Show me buttons and WCAG references" style="max-width:100%;height:auto;" />
+<img src="assets/screenshot-v1-1280x800.png" alt="Google Docs with the Docs Accessibility Checker sidebar open, showing a scan summary of 0 errors and 7 warnings, and warning cards such as 'This looks like a heading, but isn't one' with Show me buttons and WCAG references" style="max-width:100%;height:auto;" />
 
 ### The checks
 
