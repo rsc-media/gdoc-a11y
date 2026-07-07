@@ -239,6 +239,10 @@ footer {
   color: var(--muted);
 }
 
+footer p {
+  margin: 0 0 3px;
+}
+
 footer a {
   color: var(--blue);
 }

@@ -113,6 +113,9 @@ export const STRINGS = {
     errorRetry: 'Try again',
     errorReport: 'Report a problem',
     wcagPrefix: 'WCAG',
+    footerCourtesy: 'Courtesy of ',
+    footerRio: 'Rio Salado College',
+    footerGithub: 'View project on GitHub',
   },
 } as const;
 

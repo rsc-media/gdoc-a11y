@@ -13,6 +13,9 @@ const S = STRINGS.sidebar;
 // (base64 "Ly8="), which no minifier constant-folds back into a literal.
 const SLASHES = atob('Ly8=');
 const REPO_URL = `https:${SLASHES}github.com/rsc-media/gdoc-a11y`;
+const UTM = '?utm_source=OpenSource&utm_medium=a11y_app&utm_campaign=Instructional%20Technology';
+const RIO_HOME_URL = `https:${SLASHES}learnatrio.com/rio-home${UTM}`;
+const PROJECT_URL = `https:${SLASHES}learnatrio.com/gdoc-a11y${UTM}`;
 
 /* Minimal ambient typing for the google.script.run bridge. */
 interface ScriptRunner {
@@ -277,8 +280,8 @@ function showNote(note: HTMLElement, text: string): void {
 
 function footer(): HTMLElement {
   return el('footer', {}, [
-    'Free & open source. ',
-    el('a', { href: REPO_URL, text: 'Source & help' }),
+    el('p', {}, [S.footerCourtesy, el('a', { href: RIO_HOME_URL, text: S.footerRio })]),
+    el('p', {}, [el('a', { href: PROJECT_URL, text: S.footerGithub })]),
   ]);
 }
 
