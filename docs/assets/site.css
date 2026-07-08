@@ -11,6 +11,8 @@
   --shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
 }
 
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
 * {
   box-sizing: border-box;
 }
@@ -27,8 +29,12 @@ body {
     radial-gradient(circle at 95% 5%, #d8f5ec 0%, transparent 34%),
     var(--bg);
   color: var(--ink);
-  font-family: Georgia, "Times New Roman", Times, serif;
+  font-family: "Roboto", sans-serif;
+  font-size: 1rem;
+  font-weight: 500;
   line-height: 1.6;
+  font-optical-sizing: auto;
+  font-variation-settings: "wdth" 100;
 }
 
 .page-shell {
@@ -101,10 +107,6 @@ hr {
   border: 0;
   border-top: 1px solid var(--line);
   margin: 1.5rem 0;
-}
-
-.markdown-body>h1:has( a[href*="https://rsc-media.github.io/gdoc-a11y"]) {
-  display: none;
 }
 
 @media (max-width: 640px) {

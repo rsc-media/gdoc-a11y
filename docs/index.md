@@ -57,7 +57,7 @@ Script environment, makes **no external network requests**, has **no server**, a
 **stores no data**. Document content is processed in memory during a scan and never
 saved, logged, or transmitted. There are no analytics, no ads, and no tracking.
 
-Full details: **[Privacy Policy](privacy-policy.html)** · [Terms of Service](terms.html)
+Full details: [Privacy Policy](privacy-policy.html) · [Terms of Service](terms.html)
 
 ## Open source
 
