@@ -3,8 +3,6 @@ title: Docs Accessibility Checker
 description: A free, open-source Google Docs add-on that finds and fixes common accessibility problems, explained in plain language.
 ---
 
-<meta name="google-site-verification" content="GTcIUryQG_ChxbHt9jOV61fk0j9yaArzTdVL5ygF8R0" />
-
 <img src="assets/icon.svg" alt="Docs Accessibility Checker logo: a document page with an accessibility figure and a green check mark" width="150" height="150" />
 
 # Docs Accessibility Checker
