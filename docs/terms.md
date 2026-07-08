@@ -1,3 +1,7 @@
+---
+title: Terms of Service
+---
+
 # Terms of Service — Docs Accessibility Checker
 
 _Last updated: July 3, 2026_

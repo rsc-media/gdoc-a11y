@@ -1,3 +1,7 @@
+---
+title: Publishing Guide
+---
+
 # Publishing Guide — Google Workspace Marketplace
 
 How to take this add-on from the repo into users' hands. Console steps must be done by

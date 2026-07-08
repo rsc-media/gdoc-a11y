@@ -1,3 +1,7 @@
+---
+title: Project Plan
+---
+
 # Project Plan — Docs Accessibility Checker
 
 A free, open-source Google Workspace Editor add-on that helps **inexperienced users** run

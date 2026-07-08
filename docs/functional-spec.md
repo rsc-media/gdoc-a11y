@@ -1,3 +1,7 @@
+---
+title: Functional Specification
+---
+
 # Functional Specification — Docs Accessibility Checker v1
 
 This document defines _what_ the add-on does. The _how_ is in the

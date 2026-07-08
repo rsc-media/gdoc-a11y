@@ -1,0 +1,12 @@
+title: Docs Accessibility Checker
+description: A free, open-source Google Docs add-on that helps people find and fix common accessibility issues.
+
+markdown: kramdown
+
+defaults:
+  -
+    scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: default

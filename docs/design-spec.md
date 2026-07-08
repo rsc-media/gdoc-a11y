@@ -1,3 +1,7 @@
+---
+title: Design Specification
+---
+
 # Design Specification — Docs Accessibility Checker v1
 
 How the add-on is built. What it does is in the [functional spec](functional-spec.md).

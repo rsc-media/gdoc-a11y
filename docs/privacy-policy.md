@@ -1,3 +1,7 @@
+---
+title: Privacy Policy
+---
+
 # Privacy Policy — Docs Accessibility Checker
 
 _Last updated: July 3, 2026_
