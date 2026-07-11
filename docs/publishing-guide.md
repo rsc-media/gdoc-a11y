@@ -226,6 +226,33 @@ document's structure and applies user-requested fixes (image alt text, link text
 that document only. `script.container.ui` displays the add-on's results sidebar inside
 Google Docs. The add-on makes no external network requests and stores no data."
 
+Suggested "final details" response (the free-text box at the end of verification):
+
+> Docs Accessibility Checker is a Google Apps Script editor add-on for Google Docs,
+> built by Rio Salado College (rio.media@riosalado.edu). It scans the currently open
+> document for common accessibility problems and shows results in a sidebar with
+> plain-language fix guidance.
+>
+> No test user credentials are needed: the app has no login, account system, or backend
+> of its own — it runs entirely inside Google Docs under the signed-in user's account.
+> To exercise the full flow, install the add-on, open any Google Doc, and choose
+> Extensions > Docs Accessibility Checker > Check document; the OAuth consent appears on
+> first run.
+>
+> Scope usage: documents.currentonly reads the open document during a scan and applies
+> only user-requested fixes (e.g., setting an image's alt text) to that document;
+> script.container.ui displays the results sidebar. The add-on makes no external network
+> requests, stores no data, and transmits nothing — document content never leaves
+> Google's Apps Script runtime.
+>
+> This is the only Google Cloud project associated with this app; its OAuth client is
+> created and managed automatically by Apps Script (script project ID:
+> 15NvXdfBfpSgZdxTM8lD_CBOFAatcm5SoIQzsmD0n0gsY6aprw3IRh4tV). The app is open source for
+> full inspection: https://github.com/rsc-media/gdoc-a11y. Homepage:
+> https://rsc-media.github.io/gdoc-a11y/ — Privacy policy:
+> https://rsc-media.github.io/gdoc-a11y/privacy-policy.html. Happy to provide a demo
+> video or any further detail on request.
+
 ### C3. Versioned deployment
 
 Apps Script editor ▸ **Deploy ▸ New deployment ▸ type: Add-on** → description `v1.0.0` →
